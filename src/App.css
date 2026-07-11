@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+:root {
+  --bg-main: #f0f4f8;          /* Light soothing blue background */
+  --bg-card: #ffffff;          /* Pristine white for component bodies */
+  --text-dark: #1e293b;        /* Deep slate text */
+  --text-muted: #64748b;       /* Soft description text */
+  --border-admin: linear-gradient(135deg, #3b82f6, #8b5cf6);  /* Blue to Purple gradient */
+  --border-manager: linear-gradient(135deg, #10b981, #3b82f6);/* Emerald to Blue gradient */
+  --border-employee: linear-gradient(135deg, #f59e0b, #ef4444);/* Amber to Red gradient */
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+}
+
+/* Structural Glass-style Wrapper Box */
+.gradient-box {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Dual Layer Colorful Border Injection */
+.gradient-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 12px;
+  padding: 3px; /* Controls border thickness */
+  background: var(--border-admin); /* Default fallback */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.border-admin::before { background: var(--border-admin); }
+.border-manager::before { background: var(--border-manager); }
+.border-employee::before { background: var(--border-employee); }
+
+/* Input field and button controls styling */
+input, textarea, select {
+  width: 100%;
+  padding: 10px 14px;
+  margin: 8px 0 16px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  opacity: 0.9;
 }

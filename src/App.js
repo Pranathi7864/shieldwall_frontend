@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
+  // Application routing simulated through reactive user profile context tracking state
+  const [sessionUser, setSessionUser] = useState(null);
+
+  const handleLogin = (authenticatedUser) => {
+    setSessionUser(authenticatedUser);
+  };
+
+  const handleLogout = () => {
+    setSessionUser(null);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {sessionUser == null ? (
+        <Login onLoginSuccess={handleLogin} />
+      ) : (
+        <Dashboard user={sessionUser} onLogout={handleLogout} />
+      )}
     </div>
   );
 }
